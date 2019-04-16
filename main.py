@@ -49,7 +49,7 @@ def validate_fields():
         password = ''
         verify_password = ''
     if user_length > 20 or user_length <3:
-        user_error = "username must be between 3-20 characters"
+        user_error = " cannot be blank and must be between 3-20 characters"
         user = ''
         password = ''
         verify_password = ''
@@ -89,11 +89,12 @@ def validate_fields():
             email = ''
             password = ''
             verify_password = ''
-        if " " in email:
-            email_error = "email cannot contain spaces"
-            email = ''
+        if ' ' in email:
+            email_error = 'email cannot contain spaces'
             password = ''
             verify_password = ''
+
+        
     
 
     
