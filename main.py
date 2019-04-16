@@ -34,6 +34,8 @@ def validate_fields():
     email_error = ''
     password_error = ''
     user_length = len(user)
+    pass_length = len(password)
+    verify_pass_length = len(password)
     
     at_count = email.count('.')
     dot_count = email.count('@')
@@ -47,17 +49,31 @@ def validate_fields():
         password = ''
         verify_password = ''
     if user_length > 20 or user_length <3:
-        user_error = "must be between 3-20 characters"
+        user_error = "username must be between 3-20 characters"
         user = ''
         password = ''
         verify_password = ''
-    if is_null(password) or is_null(verify_password):
-        password_error = 'cannot leave either password field blank'
-        password = ''
-        verify_password = ''
+    
     if password != verify_password:
         password_error = "passwords must match"
         password=''
+        verify_password = ''
+    if pass_length >20 or pass_length <3:
+        password_error = "passwords must not be left blank and be between 3-20 characters"
+        password=''
+        verify_password = ''
+    if verify_pass_length >20 or pass_length <3:
+        password_error = "passwords must not be left blank and be between 3-20 charaters"
+        password=''
+        verify_password = ''
+    if " " in password or " " in verify_password:
+        password_error = "passwords cannot contain spaces"
+        password=''
+        verify_password = ''
+
+    if is_null(password) or is_null(verify_password):
+        #password_error = 'cannot leave either password field blank'
+        password = ''
         verify_password = ''
     
         
@@ -70,6 +86,11 @@ def validate_fields():
             verify_password = ''
         if at_count != 1 or dot_count != 1:
             email_error = 'email must contain exactly 1 @ and .'
+            email = ''
+            password = ''
+            verify_password = ''
+        if " " in email:
+            email_error = "email cannot contain spaces"
             email = ''
             password = ''
             verify_password = ''
